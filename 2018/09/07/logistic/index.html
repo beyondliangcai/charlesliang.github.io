@@ -119,7 +119,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="最小二乘,逻辑回归,python," />
 
 
 
@@ -141,16 +141,20 @@
 
 
 
-<meta name="description" content="Charles Liang的个人blog，主要和大家共同学习AI方面的技术">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Charles">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="逻辑回归（logistic regression） 机器学习主要解决两个方面的问题：分类和聚类，或者叫监督学习和非监督学习。所谓分类通俗来讲指的是训练集中的样本知道y的值（也就是结果），例如一个西瓜的例子：现在想训练一个模型f来分类西瓜甜还是不甜，我们就找一批西瓜（训练集），然后我们就观察这批西瓜，发现（根茎大，皮绿，甜），那么根茎，皮就是特征X，甜和不甜就是分类的结果Y，因为训练集里面知道了Y的">
+<meta name="keywords" content="最小二乘,逻辑回归,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习分类算法一：逻辑回归（logistic regression）">
+<meta property="og:url" content="http://yoursite.com/2018/09/07/logistic/index.html">
 <meta property="og:site_name" content="Charles">
-<meta property="og:description" content="Charles Liang的个人blog，主要和大家共同学习AI方面的技术">
+<meta property="og:description" content="逻辑回归（logistic regression） 机器学习主要解决两个方面的问题：分类和聚类，或者叫监督学习和非监督学习。所谓分类通俗来讲指的是训练集中的样本知道y的值（也就是结果），例如一个西瓜的例子：现在想训练一个模型f来分类西瓜甜还是不甜，我们就找一批西瓜（训练集），然后我们就观察这批西瓜，发现（根茎大，皮绿，甜），那么根茎，皮就是特征X，甜和不甜就是分类的结果Y，因为训练集里面知道了Y的">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2018/09/07/logistic/regression.png">
+<meta property="og:updated_time" content="2018-09-06T16:09:09.808Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Charles">
-<meta name="twitter:description" content="Charles Liang的个人blog，主要和大家共同学习AI方面的技术">
+<meta name="twitter:title" content="机器学习分类算法一：逻辑回归（logistic regression）">
+<meta name="twitter:description" content="逻辑回归（logistic regression） 机器学习主要解决两个方面的问题：分类和聚类，或者叫监督学习和非监督学习。所谓分类通俗来讲指的是训练集中的样本知道y的值（也就是结果），例如一个西瓜的例子：现在想训练一个模型f来分类西瓜甜还是不甜，我们就找一批西瓜（训练集），然后我们就观察这批西瓜，发现（根茎大，皮绿，甜），那么根茎，皮就是特征X，甜和不甜就是分类的结果Y，因为训练集里面知道了Y的">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/07/logistic/regression.png">
 
 
 
@@ -180,13 +184,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/07/logistic/"/>
 
 
 
 
 
-  <title>Charles</title>
+  <title>机器学习分类算法一：逻辑回归（logistic regression） | Charles</title>
   
 
 
@@ -204,8 +208,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/beyondliangcai" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -346,9 +349,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -378,9 +381,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/07/logistic/" itemprop="url">机器学习分类算法一：逻辑回归（logistic regression）</a></h1>
+          <h1 class="post-title" itemprop="name headline">机器学习分类算法一：逻辑回归（logistic regression）</h1>
         
 
         <div class="post-meta">
@@ -434,189 +435,13 @@
           
 
           
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="逻辑回归（logistic-regression）"><a href="#逻辑回归（logistic-regression）" class="headerlink" title="逻辑回归（logistic regression）"></a>逻辑回归（logistic regression）</h2><blockquote>
-<p>机器学习主要解决两个方面的问题：分类和聚类，或者叫监督学习和非监督学习。所谓分类通俗来讲指的是训练集中的样本知道y的值（也就是结果），例如一个西瓜的例子：现在想训练一个模型f来分类西瓜甜还是不甜，我们就找一批西瓜（训练集），然后我们就观察这批西瓜，发现（根茎大，皮绿，甜），那么根茎，皮就是特征X，甜和不甜就是分类的结果Y，因为训练集里面知道了Y的值，这种就是分类，如果我们不知道Y的值，只想把根茎大，皮绿的西瓜放到一起，其他的放到另一边，这种就是聚类。对于机器学习来说，如何找到模型f是关键问题，逻辑回归就是其中一种比较简单的线性模型。</p>
-</blockquote>
-<h3 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h3><p>我们高中或者大学可能已经学过了最小二乘法，这里简单的复习一下，最小二乘法也是逻辑回归的基础。<br><img src="/2018/09/07/logistic/regression.png" alt="Alt text" title="least_square"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  <div>
-  
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/06/menu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/06/menu/" itemprop="url">charles blog menu</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-06T20:19:32+08:00">
-                2018-09-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/目录/" itemprop="url" rel="index">
-                    <span itemprop="name">目录</span>
-                  </a>
-                </span>
-
-                
-                
-              
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
             </span>
           
 
           
-            
-          
-
-          
-          
-
-          
-
-          
             <div class="post-wordcount">
               
                 
@@ -664,35 +489,11 @@
       
 
       
-        
-          
-            <blockquote>
-<p>最近在学习AI相关的知识，学了这么长时间总感觉前面的东西又忘了，而且我觉得只要写不出来的算法都是没有搞懂的，所以从今天开始写博客,复习学过的AI相关的知识，大概先从以下三个方向写：</p>
+        <h2 id="逻辑回归（logistic-regression）"><a href="#逻辑回归（logistic-regression）" class="headerlink" title="逻辑回归（logistic regression）"></a>逻辑回归（logistic regression）</h2><blockquote>
+<p>机器学习主要解决两个方面的问题：分类和聚类，或者叫监督学习和非监督学习。所谓分类通俗来讲指的是训练集中的样本知道y的值（也就是结果），例如一个西瓜的例子：现在想训练一个模型f来分类西瓜甜还是不甜，我们就找一批西瓜（训练集），然后我们就观察这批西瓜，发现（根茎大，皮绿，甜），那么根茎，皮就是特征X，甜和不甜就是分类的结果Y，因为训练集里面知道了Y的值，这种就是分类，如果我们不知道Y的值，只想把根茎大，皮绿的西瓜放到一起，其他的放到另一边，这种就是聚类。对于机器学习来说，如何找到模型f是关键问题，逻辑回归就是其中一种比较简单的线性模型。</p>
 </blockquote>
-<h2 id="1-机器学习篇"><a href="#1-机器学习篇" class="headerlink" title="1.机器学习篇"></a>1.机器学习篇</h2><blockquote>
-<p>机器学习片篇基本上按照李航老师和Andrew Ng 的顺序写分类和聚类的算法</p>
-<ul>
-<li>1.监督学习篇<ul>
-<li>1.KNN</li>
-<li>2.logistic regession</li>
-</ul>
-</li>
-<li>2.非监督学习篇</li>
-</ul>
-</blockquote>
-<h2 id="2-深度学习"><a href="#2-深度学习" class="headerlink" title="2.深度学习"></a>2.深度学习</h2><ul>
-<li>1.卷积神经网络</li>
-<li>2.递归神经网络</li>
-</ul>
-<h2 id="3-NLP篇"><a href="#3-NLP篇" class="headerlink" title="3.NLP篇"></a>3.NLP篇</h2><ul>
-<li>1.概率图模型</li>
-<li>2.汉语分词</li>
-<li>3.句法分析</li>
-<li>4.语义分析</li>
-</ul>
+<h3 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h3><p>我们高中或者大学可能已经学过了最小二乘法，这里简单的复习一下，最小二乘法也是逻辑回归的基础。<br><img src="/2018/09/07/logistic/regression.png" alt="Alt text" title="least_square"></p>
 
-          
-        
       
     </div>
     
@@ -700,27 +501,104 @@
     
     <div>
           
+            
+
+          
     </div>
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://p3dm71oa7.bkt.clouddn.com/wcpay.png" alt="Charles WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://p3dm71oa7.bkt.clouddn.com/zfbpay.jpg" alt="Charles Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/最小二乘/" <i class="fa fa-tag"></i> 最小二乘</a>
+          
+            <a href="/tags/逻辑回归/" <i class="fa fa-tag"></i> 逻辑回归</a>
+          
+            <a href="/tags/python/" <i class="fa fa-tag"></i> python</a>
+          
+        </div>
       
 
       
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/06/menu/" rel="next" title="charles blog menu">
+                <i class="fa fa-chevron-left"></i> charles blog menu
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
   <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #555;font-size:14px;">-------------The End-------------</div>
+    
+</div>
+
   
   </div>
   
@@ -729,10 +607,17 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b8eac7844937a64" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -740,6 +625,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTUwMi8xNjAyOQ"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -760,8 +654,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -890,6 +793,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑回归（logistic-regression）"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归（logistic regression）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最小二乘法"><span class="nav-number">1.1.</span> <span class="nav-text">最小二乘法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1057,6 +976,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1085,6 +1008,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -1125,6 +1059,23 @@
 
   
   
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13638,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
 
   
 
