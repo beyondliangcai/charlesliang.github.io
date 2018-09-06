@@ -49,9 +49,9 @@
     <link href="http://yoursite.com/2016/01/15/logistic-md/"/>
     <id>http://yoursite.com/2016/01/15/logistic-md/</id>
     <published>2016-01-15T12:19:32.000Z</published>
-    <updated>2018-09-06T13:53:00.336Z</updated>
+    <updated>2018-09-06T15:58:20.747Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="逻辑回归（logistic-regression）"><a href="#逻辑回归（logistic-regression）" class="headerlink" title="逻辑回归（logistic regression）"></a>逻辑回归（logistic regression）</h2><blockquote><p>机器学习主要解决两个方面的问题：分类和聚类，或者叫监督学习和非监督学习。所谓分类通俗来讲指的是训练集中的样本知道y的值（也就是结果），例如一个西瓜的例子：现在想训练一个模型f来分类西瓜甜还是不甜，我们就找一批西瓜（训练集），然后我们就观察这批西瓜，发现（根茎大，皮绿，甜），那么根茎，皮就是特征X，甜和不甜就是分类的结果Y，因为训练集里面知道了Y的值，这种就是分类，如果我们不知道Y的值，只想把根茎大，皮绿的西瓜放到一起，其他的放到另一边，这种就是聚类。对于机器学习来说，如何找到模型f是关键问题，逻辑回归就是其中一种比较简单的线性模型。</p></blockquote><h3 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h3><p>我们高中或者大学可能已经学过了最小二乘法，这里简单的复习一下，最小二乘法也是逻辑回归的基础。<br><img src="Figure_1.png" alt="Alt text" title="Optional title"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="逻辑回归（logistic-regression）"><a href="#逻辑回归（logistic-regression）" class="headerlink" title="逻辑回归（logistic regression）"></a>逻辑回归（logistic regression）</h2><blockquote><p>机器学习主要解决两个方面的问题：分类和聚类，或者叫监督学习和非监督学习。所谓分类通俗来讲指的是训练集中的样本知道y的值（也就是结果），例如一个西瓜的例子：现在想训练一个模型f来分类西瓜甜还是不甜，我们就找一批西瓜（训练集），然后我们就观察这批西瓜，发现（根茎大，皮绿，甜），那么根茎，皮就是特征X，甜和不甜就是分类的结果Y，因为训练集里面知道了Y的值，这种就是分类，如果我们不知道Y的值，只想把根茎大，皮绿的西瓜放到一起，其他的放到另一边，这种就是聚类。对于机器学习来说，如何找到模型f是关键问题，逻辑回归就是其中一种比较简单的线性模型。</p></blockquote><h3 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h3><p>我们高中或者大学可能已经学过了最小二乘法，这里简单的复习一下，最小二乘法也是逻辑回归的基础。<br><img src="pic/regression.png" alt="Alt text" title="least_square"></p>]]></content>
     
     <summary type="html">
     
