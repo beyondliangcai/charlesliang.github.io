@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-16T13:34:38.288Z</updated>
+  <updated>2019-03-16T14:47:32.854Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2019/03/16/Monte-Carlo/"/>
     <id>http://yoursite.com/2019/03/16/Monte-Carlo/</id>
     <published>2019-03-16T13:24:17.000Z</published>
-    <updated>2019-03-16T13:34:38.288Z</updated>
+    <updated>2019-03-16T14:47:32.854Z</updated>
     
-    <content type="html"><![CDATA[<!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script> --><h2 id="Monte-Carlo-Method"><a href="#Monte-Carlo-Method" class="headerlink" title="Monte Carlo Method"></a>Monte Carlo Method</h2><blockquote><p>主要了参考刘建平Pinard老师的文章和LDA 数学八卦.pdf ，有兴趣的同学可以去深入学习一下：<a href="https://www.cnblogs.com/pinard/p/6625739.html" target="_blank" rel="noopener">https://www.cnblogs.com/pinard/p/6625739.html</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script> --><h2 id="Monte-Carlo-Method"><a href="#Monte-Carlo-Method" class="headerlink" title="Monte Carlo Method"></a>Monte Carlo Method</h2><blockquote><p>主要参考刘建平Pinard老师的文章和LDA 数学八卦.pdf ，有兴趣的同学可以去深入学习一下：<a href="https://www.cnblogs.com/pinard/p/6625739.html" target="_blank" rel="noopener">https://www.cnblogs.com/pinard/p/6625739.html</a> 和<a href="/doc/Monte-Carlo/LDA数学八卦.pdf">LDA数学八卦.pdf</a></p></blockquote><p>###1.Monte Carlo Method 介绍<br>蒙特卡罗原来是一个赌场的名称，用它作为名字大概是因为蒙特卡罗方法是一种随机模拟的方法，这很像赌博场里面的扔骰子的过程。最早的蒙特卡罗方法都是为了求解一些不太好求解的求和或者积分问题。比如积分：</p>]]></content>
     
     <summary type="html">
     
